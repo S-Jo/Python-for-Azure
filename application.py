@@ -14,7 +14,7 @@ def webhook():
     #except AttributeError:
     #    return 'json error'
     # return a fulfillment response
-    return "sneha"
+    return jsonify("sneha")
     #{'fulfillmentText': 'This is a response from webhook.'}
 
 if __name__ == "__main__":
