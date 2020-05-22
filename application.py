@@ -13,6 +13,8 @@ def webhook():
         action = req.get('queryResult').get('action')
     except AttributeError:
         return 'json error'
+    # return a fulfillment response
+    return {'fulfillmentText': 'This is a response from webhook.'}
 
 if __name__ == "__main__":
     app.run()
