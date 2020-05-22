@@ -14,7 +14,8 @@ def webhook():
     #except AttributeError:
     #    return 'json error'
     # return a fulfillment response
-    return {'fulfillmentText': 'This is a response from webhook.'}
+    return "sneha"
+    #{'fulfillmentText': 'This is a response from webhook.'}
 
 if __name__ == "__main__":
     app.run()
