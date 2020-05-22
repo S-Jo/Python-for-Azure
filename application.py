@@ -7,7 +7,7 @@ def hello():
 
 @app.route("/webhook")
 def webhook():
-    return "Hello World!"
+    return "Hello from Webhook!"
 
 if __name__ == "__main__":
     app.run()
