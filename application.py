@@ -5,7 +5,7 @@ app = Flask(__name__)
 def hello():
     return "Hello World!"
 
-@app.route("/webhook")
+@app.route("/api/webhook")
 def webhook():
     return jsonify("Webhook Successfull")
 
