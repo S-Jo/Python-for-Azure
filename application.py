@@ -17,9 +17,11 @@ def results():
 
     if action == "input.unknown":
         return "Received Fallback intent"
-    elif: action == "input.welcome"
+    elif: 
+        action == "input.welcome"
         return "Received Welcome intent"
-    else return "Intent not recognized"
+    else:
+        return "Intent not recognized"
     
 @app.route("/Webhook", methods=['GET', 'POST'])
 def webhook():
