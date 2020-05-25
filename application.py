@@ -6,13 +6,17 @@ def hello():
     return "Hello World!"
 
 def results():
-    req = request.get_json(force=True)
+    # build a request object
+    try:
+        req = request.get_json(force=True)
+    except AttributeError:
+        return "No JSON Request is received. Try running the API from Dialogflow"
     
     # fetch action from json
     try:
         action = req.get("queryResult").get("action")
     except AttributeError:
-        return {"fulfillmentText": "JSON Request is not sent to the server"}
+        return "No JSON Request is received. Try running the API from Dialogflow"
     
     if action == "input.unknown":
         return {"fulfillmentText": "Received Fallback intent"}
