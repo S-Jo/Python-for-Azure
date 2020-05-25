@@ -16,8 +16,7 @@ def results():
     
     if action == "input.unknown":
         return {"fulfillmentText": "Received Fallback intent"}
-    elif: 
-        action == "input.welcome"
+    elif action == "input.welcome":
         return {"fulfillmentText": "Received Welcome intent"}
     else:
         return {"fulfillmentText": "Intent not recognized"}
