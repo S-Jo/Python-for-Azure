@@ -12,7 +12,7 @@ def results():
     try:
         action = req.get("queryResult").get("action")
     except AttributeError:
-        return {{"fulfillmentText": "JSON Request is not sent to the server"}
+        return {"fulfillmentText": "JSON Request is not sent to the server"}
     
     if action == "input.unknown":
         return {"fulfillmentText": "Received Fallback intent"}
