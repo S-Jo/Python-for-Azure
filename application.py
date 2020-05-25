@@ -6,7 +6,16 @@ def hello():
     return "Hello World!"
 
 def results():
+    req = request.get_json(force=True)
+    
+    # fetch action from json
+    try:
+        action = req.get("queryResult").get("action")
+    except AttributeError:
+        return {"JSON Request is not sent to the server"}
+    
     return {"fulfillmentText": "This is a response from webhook."}
+
     '''# build a request object
     req = request.get_json(force=True)
 
