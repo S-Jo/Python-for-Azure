@@ -15,9 +15,12 @@ def results():
     except AttributeError:
         return "JSON Request is not sent to the server"
 
-    # return a fulfillment response
-    return {'fulfillmentText': 'This is a response from webhook.'}
-
+    if action == "input.unknown":
+        return "Received Fallback intent"
+    elif: action == "input.welcome"
+        return "Received Welcome intent"
+    else return "Intent not recognized"
+    
 @app.route("/Webhook", methods=['GET', 'POST'])
 def webhook():
     return make_response(jsonify(results()))
