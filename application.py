@@ -27,7 +27,7 @@ def results():
     
     #return {"fulfillmentText": "This is a response from webhook."}
     
-@app.route("/Webhook", methods=['GET', 'POST'])
+@app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
     return make_response(jsonify(results()))
 
