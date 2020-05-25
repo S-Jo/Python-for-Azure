@@ -10,7 +10,10 @@ def results():
     req = request.get_json(force=True)
 
     # fetch action from json
-    action = req.get('queryResult').get('action')
+    try:
+        action = req.get("queryResult").get("action")
+    except AttributeError:
+        return "JSON Request is not sent to the server"
 
     # return a fulfillment response
     return {'fulfillmentText': 'This is a response from webhook.'}
