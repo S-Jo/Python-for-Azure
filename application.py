@@ -19,10 +19,13 @@ def results():
         return "No JSON Request is received. Try running the API from Dialogflow"
     
     if action == "Product":
+        return {"fulfillmentText": "Product Intent"}        
+    '''    
         product = req.get("queryResult").get("parameters").get("Product")
         filterr = req.get("queryResult").get("parameters").get("Filter")
         return {"fulfillmentText:" + product + " - " + filterr}
     #return {"fulfillmentText": "This is a response from webhook."}
+    '''
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
