@@ -18,13 +18,10 @@ def results():
     except AttributeError:
         return "No JSON Request is received. Try running the API from Dialogflow"
     
-    if action == "input.unknown":
-        return {"fulfillmentText": "Received Fallback intent"}
-    elif action == "input.welcome":
-        return {"fulfillmentText": "Received Welcome intent"}
-    else:
-        return {"fulfillmentText": "Intent not recognized"}
-    
+    if action == "Product":
+        product = req.get("queryResult").get("parameters").get("Product")
+        filterr = req.get("queryResult").get("parameters").get("Filter"))
+        return {"fulfillmentText": product " - " filterr}
     #return {"fulfillmentText": "This is a response from webhook."}
     
 @app.route("/webhook", methods=['GET', 'POST'])
