@@ -19,7 +19,8 @@ def results():
         return "No JSON Request is received. Try running the API from Dialogflow"
     
     if action == "Product":
-        return {"fulfillmentText": "Product Intent"}        
+        product = req.get("queryResult").get("parameters").get("Product")
+        return {"fulfillmentText": "Product: {}".format(product)}        
     '''    
         product = req.get("queryResult").get("parameters").get("Product")
         filterr = req.get("queryResult").get("parameters").get("Filter")
