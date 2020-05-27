@@ -6,13 +6,9 @@ def hello():
     return "Hello World!"
 
 def results():
-    try:
-        req = request.get_json(force=True)
-	action = req.get("queryResult").get("action")
-    except AttributeError:
-        return "No JSON Request is received. Try running the API from Dialogflow"
-    
-    return {"fulfillmentText": "This is a response from webhook."}
+	req = request.get_json(force=True)
+	action = req.get("queryResult").get("action")    
+    	return {"fulfillmentText": "This is a response from webhook."}
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
