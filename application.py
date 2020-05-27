@@ -13,10 +13,10 @@ def results():
     # fetch action from json
     action = req.get('queryResult').get('action')
     
-    if action == "Product":
-        product = req.get("queryResult").get("parameters").get("Product")
-        filterr = req.get("queryResult").get("parameters").get("Filter")
-        return {"fulfillmentText": "This is a Product intent"}
+    if action == "FundAction":
+        fund = req.get("queryResult").get("parameters").get("Fund")
+        filterr = req.get("queryResult").get("parameters").get("filter")
+        return {"fulfillmentText": "This is a Fund intent"}
     else:
         return {"fulfillmentText": "Intent not recognized"}
     
