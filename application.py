@@ -5,7 +5,7 @@ app = Flask(__name__)
 def hello():
     return "Hello World!"
 
-# function for responses
+# function for response
 def results():
     # build a request object
     req = request.get_json(force=True)
