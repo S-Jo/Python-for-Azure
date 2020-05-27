@@ -16,10 +16,9 @@ def results():
     if action == "Product":
         product = req.get("queryResult").get("parameters").get("Product")
         filterr = req.get("queryResult").get("parameters").get("Filter")
-        return "This is a Product intent"
-
-    # return a fulfillment response
-    return {'fulfillmentText': 'This is a response from webhook.'}
+        return {"fulfillmentText": "This is a Product intent"}
+    else:
+        return {"fulfillmentText": "Intent not recognized"}
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
