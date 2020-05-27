@@ -5,10 +5,16 @@ app = Flask(__name__)
 def hello():
     return "Hello World!"
 
+# function for responses
 def results():
-	req = request.get_json(force=True)
-	action = req.get("queryResult").get("action")    
-    	return {"fulfillmentText": "This is a response from webhook."}
+    # build a request object
+    req = request.get_json(force=True)
+
+    # fetch action from json
+    action = req.get('queryResult').get('action')
+
+    # return a fulfillment response
+    return {'fulfillmentText': 'This is a response from webhook.'}
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
