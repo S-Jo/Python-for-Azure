@@ -8,7 +8,7 @@ def hello():
 def results():
     try:
         req = request.get_json(force=True)
-		action = req.get("queryResult").get("action")
+	action = req.get("queryResult").get("action")
     except AttributeError:
         return "No JSON Request is received. Try running the API from Dialogflow"
     
