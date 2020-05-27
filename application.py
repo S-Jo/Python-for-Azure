@@ -12,6 +12,11 @@ def results():
 
     # fetch action from json
     action = req.get('queryResult').get('action')
+    
+    if action == "Product":
+        product = req.get("queryResult").get("parameters").get("Product")
+        filterr = req.get("queryResult").get("parameters").get("Filter")
+        return "This is a Product intent"
 
     # return a fulfillment response
     return {'fulfillmentText': 'This is a response from webhook.'}
