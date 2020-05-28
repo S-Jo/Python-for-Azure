@@ -16,7 +16,7 @@ def results():
     try:
         cnxn = pyodbc.connect(('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password),timeout=5)
     except pyodbc.Error as err:
-        return "Couldn't connect"
+        return "Couldn not connect"
     return "Webhook Successful"
     
 @app.route("/webhook", methods=['GET', 'POST'])
