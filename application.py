@@ -45,14 +45,15 @@ def fetchjson():
     
     if action == "FundAction":
         try:
-            fund = req.get("queryResult").get("parameters").get("Fund")
+            fund = "jhk"
+            #req.get("queryResult").get("parameters").get("Fund")
         except AttributeError:
             return "json error: could not fetch parameters"
         try:
             filterr = req.get("queryResult").get("parameters").get("filter")
         except AttributeError:
             return "json error: could not fetch parameters"
-        return fund + "  -  " + filterr
+        return str(fund)
         #return results(filterr,fund)
     else:
         return "Intent not recognized"
