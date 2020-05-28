@@ -45,8 +45,7 @@ def fetchjson():
     
     if action == "FundAction":
         try:
-            fund = "jhk"
-            #req.get("queryResult").get("parameters").get("Fund")
+            fund = req.get("queryResult").get("parameters").get("Fund")
         except AttributeError:
             return "json error: could not fetch parameters"
         try:
