@@ -13,11 +13,11 @@ def results():
     username = 'srvforpoc'
     password = 'Server@123'
     driver= '{ODBC Driver 17 for SQL Server}'
-    try:
-        cnxn = pyodbc.connect(('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password),timeout=5)
-    except pyodbc.Error as err:
-        return "Couldn not connect"
-    return "Webhook Successful"
+    cnxn = pyodbc.connect(('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password),timeout=5)
+    cursor = cnxn.cursor()
+    ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = 'franklin asian equity fund'")
+    row = cursor.fetchone()
+    return row[0]
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
