@@ -40,8 +40,8 @@ def fetchjson():
     
     if action == "FundAction":
         p1 = replace(str(req.get("queryResult").get("parameters").get("Fund"))
-        fund = p1.replace("[\'","")
-        fund = fund.replace("\']","")             
+        fund = p1.replace("[","")
+        fund = fund.replace("]","")             
         filterr = str(req.get("queryResult").get("parameters").get("filter"))
         return results(filterr,fund)
     else:
