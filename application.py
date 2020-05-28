@@ -30,6 +30,7 @@ def results(filterr,fundname):
         return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio, " + str(row[2]) + " and managed by " + row[3] +"."
     else:
          return "Something went wrong"
+ '''
 
 # function for response
 def fetchjson():
@@ -39,12 +40,13 @@ def fetchjson():
     if action == "FundAction":
         fund = req.get("queryResult").get("parameters").get("Fund")
         filterr = req.get("queryResult").get("parameters").get("filter")
-        return results(filterr,fund)
+        return fund + "   -   " + filterr
+#results(filterr,fund)
     else:
         return "Intent not recognized"
     
     #To test local
-    
+  '''  
     p1 = "Expense Ratio"
     p2 = "franklin asian equity fund"
     return results(p1,p2)
@@ -52,9 +54,8 @@ def fetchjson():
 
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
-    #return make_response(jsonify(fetchjson()))
-    #res = fetchjson()
-    return make_response(jsonify({'fulfillmentText': 'yes'}))
+    return make_response(jsonify({'fulfillmentText':fetchjson()))
+    #return make_response(jsonify({'fulfillmentText': 'yes'}))
 
 if __name__ == "__main__":
     app.run()
