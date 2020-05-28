@@ -10,18 +10,17 @@ def hello():
 def results(filterr,fundname):
     filtertype = filterr
     fund = fundname
-    server = 'tcp:srvforpoc.database.windows.net'
+    server = 'srvforpoc.database.windows.net'
     database = 'DBBotServiceData'
     username = 'srvforpoc'
     password = 'Server@123'
-    driver= '{SQL Server Native Client 11.0}'
+    driver= '{ODBC Driver 17 for SQL Server}'
     cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '%s'"%fund)
     row = cursor.fetchone()
     if filtertype == "AUM":
-        return "success"
-    #"AUM for the " + fund + " is " + str(row[1]) + " Crore."
+        return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
     elif filtertype == "Expense Ratio":
         return "Expense Ratio for the " + fund + " is " + str(row[2]) + "."
     elif filtertype == "Fund Manager":
