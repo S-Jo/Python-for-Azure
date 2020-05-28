@@ -17,7 +17,7 @@ def results(filterr,fundname):
     driver= '{ODBC Driver 17 for SQL Server}'
     cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
-    ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = 'franklin asian equity fund'")
+    ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
     row = cursor.fetchone()
     if filtertype == "AUM":
         return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
