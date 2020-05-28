@@ -15,7 +15,10 @@ def results(filterr,fundname):
     username = 'srvforpoc'
     password = 'Server@123'
     driver= '{ODBC Driver 17 for SQL Server}'
-    cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
+    try:
+        cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
+    except pyodbc.Error as err:
+        return "Couldn't connect to database"
     cursor = cnxn.cursor()
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
     row = cursor.fetchone()
@@ -32,12 +35,15 @@ def results(filterr,fundname):
 
 # function for response
 def fetchjson():
-    req = request.get_json(force=True)
-    action = req.get('queryResult').get('action')
+    #req = request.get_json(force=True)
+    #action = req.get('queryResult').get('action')
     
-    if action == "FundAction":
-        p1 = str(req.get("queryResult").get("parameters").get("Fund"))
-        p2 = str(req.get("queryResult").get("parameters").get("filter"))
+    if 1==1:
+    #action == "FundAction":
+        p1 = str("['FRANKLIN ASIAN EQUITY FUND']")
+        #str(req.get("queryResult").get("parameters").get("Fund"))
+        p2 = str("['Fund Manager']")
+        #str(req.get("queryResult").get("parameters").get("filter"))
         fund = p1.replace("[\'","")
         fund = fund.replace("\']","")
         filterr = p2.replace("[\'","")
