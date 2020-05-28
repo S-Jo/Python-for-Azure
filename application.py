@@ -10,11 +10,11 @@ def hello():
 def results(filterr,fundname):
     filtertype = filterr
     fund = fundname
-    server = 'srvforpoc.database.windows.net'
+    server = 'tcp:srvforpoc.database.windows.net'
     database = 'DBBotServiceData'
     username = 'srvforpoc'
     password = 'Server@123'
-    driver= '{ODBC Driver 17 for SQL Server}'
+    driver= '{SQL Server Native Client 11.0}'
     cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '%s'"%fund)
