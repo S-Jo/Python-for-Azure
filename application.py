@@ -32,24 +32,23 @@ def results(filterr,fundname):
 
 # function for response
 def fetchjson():
-    '''req = request.get_json(force=True)
+    req = request.get_json(force=True)
     action = req.get('queryResult').get('action')
     
     if action == "FundAction":
         fund = req.get("queryResult").get("parameters").get("Fund")
         filterr = req.get("queryResult").get("parameters").get("filter")
-        res = results(filterr,fund)
-        return res
-        #return results(filterr,fund)
+        return results(filterr,fund)
     else:
         return "Intent not recognized"
-        '''
     
     #To test local
+    '''
     p1 = "Expense Ratio"
     p2 = "franklin asian equity fund"
     return results(p1,p2)
-    
+    '''
+        
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
     #return make_response(jsonify(fetchjson()))
