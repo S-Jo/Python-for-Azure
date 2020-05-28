@@ -29,7 +29,7 @@ def results(filterr,fundname):
     elif "Fund Manager" in filtertype:
         return "Fund Manager for the " + fund + " is " + row[3] + "."
     elif "Details" in filtertype:
-        return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio, " + str(row[2]) + " and managed by " + row[3] +"."
+        return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio is " + str(row[2]) + " and managed by " + row[3] +"."
     else:
          return "Something went wrong"
 
@@ -39,7 +39,9 @@ def fetchjson():
     action = req.get('queryResult').get('action')
     
     if action == "FundAction":
-        fund = str(req.get("queryResult").get("parameters").get("Fund"))
+        p1 = replace(str(req.get("queryResult").get("parameters").get("Fund"))
+        fund = p1.replace("[\'","")
+        fund = fund.replace("\']","")             
         filterr = str(req.get("queryResult").get("parameters").get("filter"))
         return results(filterr,fund)
     else:
