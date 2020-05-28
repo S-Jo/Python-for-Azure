@@ -52,7 +52,7 @@ def fetchjson():
             filterr = req.get("queryResult").get("parameters").get("filter")
         except AttributeError:
             return "json error: could not fetch parameters"
-        return "yes"
+        return fund + "  -  " + filterr
         #return results(filterr,fund)
     else:
         return "Intent not recognized"
