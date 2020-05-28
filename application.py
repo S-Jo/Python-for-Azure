@@ -36,7 +36,10 @@ def fetchjson():
     action = req.get('queryResult').get('action')
     
     if action == "FundAction":
-        return "Action recognized"
+        p1 = "Expense Ratio"
+        p2 = "franklin asian equity fund"
+        return results(p1,p2)
+        #return "Action recognized"
         #fund = req.get("queryResult").get("parameters").get("Fund")
         #filterr = req.get("queryResult").get("parameters").get("filter")
         #return results(filterr,fund)
