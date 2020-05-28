@@ -20,7 +20,8 @@ def results(filterr,fundname):
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '%s'"%fund)
     row = cursor.fetchone()
     if filtertype == "AUM":
-        return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
+        return "success"
+    #"AUM for the " + fund + " is " + str(row[1]) + " Crore."
     elif filtertype == "Expense Ratio":
         return "Expense Ratio for the " + fund + " is " + str(row[2]) + "."
     elif filtertype == "Fund Manager":
@@ -38,7 +39,7 @@ def fetchjson():
     if action == "FundAction":
         fund = req.get("queryResult").get("parameters").get("Fund")
         filterr = req.get("queryResult").get("parameters").get("filter")
-        res = fund + filterr
+        res = results(filterr,fund)
         return res
         #return results(filterr,fund)
     else:
