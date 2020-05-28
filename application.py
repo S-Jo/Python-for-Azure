@@ -7,7 +7,6 @@ app = Flask(__name__)
 def hello():
     return "App is working"
 
-'''
 def results(filterr,fundname):
     filtertype = filterr
     fund = fundname
@@ -16,10 +15,7 @@ def results(filterr,fundname):
     username = 'srvforpoc'
     password = 'Server@123'
     driver= '{ODBC Driver 17 for SQL Server}'
-    try:
-        cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
-    except pyodbc.Error as err:
-        return "Couldn't connect to database"
+    cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
     row = cursor.fetchone()
@@ -33,40 +29,33 @@ def results(filterr,fundname):
         return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio, " + str(row[2]) + " and managed by " + row[3] +"."
     else:
          return "Something went wrong"
-'''
 
 # function for response
 def fetchjson():
-    req = request.get_json(silent=True, force=True)
-    try:
-        action = req.get('queryResult').get('action')
-    except AttributeError:
-        return "json error: could not fetch action"
+    req = request.get_json(force=True)
+    action = req.get('queryResult').get('action')
     
     if action == "FundAction":
-        try:
-            fund = req.get("queryResult").get("parameters").get("Fund")
-        except AttributeError:
-            return "json error: could not fetch parameters"
-        try:
-            filterr = req.get("queryResult").get("parameters").get("filter")
-        except AttributeError:
-            return "json error: could not fetch parameters"
-        return str(fund)
-        #return results(filterr,fund)
+        fund = str(req.get("queryResult").get("parameters").get("Fund"))
+        filterr = str(req.get("queryResult").get("parameters").get("filter"))
+        return fund+ " - " + filterr
+        #results(filterr,fund)
     else:
         return "Intent not recognized"
     
     #To test local
-    '''  
+    '''
     p1 = "Expense Ratio"
     p2 = "franklin asian equity fund"
     return results(p1,p2)
     '''
-
+        
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
+    #return make_response(jsonify(fetchjson()))
+    #res = fetchjson()
     return make_response(jsonify({'fulfillmentText': fetchjson()}))
 
 if __name__ == "__main__":
     app.run()
+    
