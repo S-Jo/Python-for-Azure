@@ -36,9 +36,10 @@ def fetchjson():
     action = req.get('queryResult').get('action')
     
     if action == "FundAction":
-        fund = req.get("queryResult").get("parameters").get("Fund")
-        filterr = req.get("queryResult").get("parameters").get("filter")
-        return results(filterr,fund)
+        return "Action recognized"
+        #fund = req.get("queryResult").get("parameters").get("Fund")
+        #filterr = req.get("queryResult").get("parameters").get("filter")
+        #return results(filterr,fund)
     else:
         return "Intent not recognized"
     
