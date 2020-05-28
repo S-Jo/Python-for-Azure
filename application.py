@@ -39,7 +39,7 @@ def fetchjson():
     action = req.get('queryResult').get('action')
     
     if action == "FundAction":
-        p1 = replace(str(req.get("queryResult").get("parameters").get("Fund"))
+        p1 = str(req.get("queryResult").get("parameters").get("Fund"))
         fund = p1.replace("[","")
         fund = fund.replace("]","")             
         filterr = str(req.get("queryResult").get("parameters").get("filter"))
