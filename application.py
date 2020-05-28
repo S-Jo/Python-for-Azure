@@ -35,20 +35,18 @@ def results(filterr,fundname):
 
 # function for response
 def fetchjson():
-    #req = request.get_json(force=True)
-    #action = req.get('queryResult').get('action')
+    req = request.get_json(force=True)
+    action = req.get('queryResult').get('action')
     
-    if 1==1:
-    #action == "FundAction":
-        p1 = str("['FRANKLIN ASIAN EQUITY FUND']")
-        #str(req.get("queryResult").get("parameters").get("Fund"))
-        p2 = str("['Fund Manager']")
-        #str(req.get("queryResult").get("parameters").get("filter"))
+    if action == "FundAction":
+        p1 = str(req.get("queryResult").get("parameters").get("Fund"))
+        p2 = str(req.get("queryResult").get("parameters").get("filter"))
         fund = p1.replace("[\'","")
         fund = fund.replace("\']","")
         filterr = p2.replace("[\'","")
         filterr = filterr.replace("\']","")
-        return results(filterr,fund)
+        return pl + "-" + p2 +"-" + fund + "-" + filterr
+        #return results(filterr,fund)
     else:
         return "Intent not recognized"
     
