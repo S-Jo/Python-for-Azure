@@ -54,7 +54,7 @@ def fetchjson():
 def webhook():
     #return make_response(jsonify(fetchjson()))
     #res = fetchjson()
-    return make_response(jsonify({'fulfillmentText': 'yes"}))
+    return make_response(jsonify({'fulfillmentText': 'yes'}))
 
 if __name__ == "__main__":
     app.run()
