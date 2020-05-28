@@ -42,8 +42,7 @@ def fetchjson():
         fund = fund.replace("\']","")
         filterr = p2.replace("[\'","")
         filterr = filterr.replace("\']","")
-        return fund + " - " + filterr
-        #results(filterr,fund)
+        return results(filterr,fund)
     else:
         return "Intent not recognized"
     
