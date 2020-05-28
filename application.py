@@ -10,7 +10,7 @@ def hello():
 def results(filterr,fundname):
     filtertype = filterr
     fund = fundname
-    server = 'srvforpoc.database.windows.net'
+    server = 'tcp:srvforpoc.database.windows.net,1433'
     database = 'DBBotServiceData'
     username = 'srvforpoc'
     password = 'Server@123'
@@ -32,7 +32,7 @@ def results(filterr,fundname):
 
 # function for response
 def fetchjson():
-    req = request.get_json(force=True)
+    '''req = request.get_json(force=True)
     action = req.get('queryResult').get('action')
     
     if action == "FundAction":
@@ -43,13 +43,12 @@ def fetchjson():
         #return results(filterr,fund)
     else:
         return "Intent not recognized"
+        '''
     
     #To test local
-    '''
     p1 = "Expense Ratio"
     p2 = "franklin asian equity fund"
     return results(p1,p2)
-    '''
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
@@ -59,4 +58,3 @@ def webhook():
 
 if __name__ == "__main__":
     app.run()
-    
