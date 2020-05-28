@@ -22,13 +22,13 @@ def results(filterr,fundname):
     cursor = cnxn.cursor()
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = 'franklin asian equity fund'")
     row = cursor.fetchone()
-    if filtertype == "[\'AUM\']":
+    if "AUM" in filtertype:
         return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
-    elif filtertype == "[\'Expense Ratio\']":
+    elif "Expense Ratio" in filtertype:
         return "Expense Ratio for the " + fund + " is " + str(row[2]) + "."
-    elif filtertype == "[\'Fund Manager\']":
+    elif "Fund Manager" in filtertype:
         return "Fund Manager for the " + fund + " is " + row[3] + "."
-    elif filtertype == "[\'Details\']":
+    elif "Details" in filtertype:
         return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio, " + str(row[2]) + " and managed by " + row[3] +"."
     else:
          return "Something went wrong"
