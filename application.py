@@ -17,7 +17,8 @@ def results():
     cursor = cnxn.cursor()
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = 'franklin asian equity fund'")
     row = cursor.fetchone()
-    return row[0]
+    fund = "gyugubi"
+    return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
     
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
