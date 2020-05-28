@@ -7,6 +7,7 @@ app = Flask(__name__)
 def hello():
     return "App is working"
 
+'''
 def results(filterr,fundname):
     filtertype = filterr
     fund = fundname
@@ -32,6 +33,7 @@ def results(filterr,fundname):
         return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio, " + str(row[2]) + " and managed by " + row[3] +"."
     else:
          return "Something went wrong"
+'''
 
 # function for response
 def fetchjson():
@@ -50,8 +52,8 @@ def fetchjson():
             filterr = req.get("queryResult").get("parameters").get("filter")
         except AttributeError:
             return "json error: could not fetch parameters"
-        #return "yes"
-        return results(filterr,fund)
+        return "yes"
+        #return results(filterr,fund)
     else:
         return "Intent not recognized"
     
