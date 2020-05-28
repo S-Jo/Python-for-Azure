@@ -38,11 +38,17 @@ def fetchjson():
     try:
         action = req.get('queryResult').get('action')
     except AttributeError:
-        return 'json error'
+        return "json error: could not fetch action"
     
     if action == "FundAction":
-        #fund = req.get("queryResult").get("parameters").get("Fund")
-        #filterr = req.get("queryResult").get("parameters").get("filter")
+        try:
+            fund = req.get("queryResult").get("parameters").get("Fund")
+        except AttributeError:
+            return "json error: could not fetch parameters"
+        try:
+            filterr = req.get("queryResult").get("parameters").get("filter")
+        except AttributeError:
+            return "json error: could not fetch parameters"
         return "yes"
         #results(filterr,fund)
     else:
