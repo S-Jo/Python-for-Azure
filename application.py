@@ -34,8 +34,11 @@ def results(filterr,fundname):
 
 # function for response
 def fetchjson():
-    req = request.get_json(force=True)
-    action = req.get('queryResult').get('action')
+    req = request.get_json(silent=True, force=True)
+    try:
+        action = req.get('queryResult').get('action')
+    except AttributeError:
+        return 'json error'
     
     if action == "FundAction":
         #fund = req.get("queryResult").get("parameters").get("Fund")
@@ -55,7 +58,6 @@ def fetchjson():
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
     return make_response(jsonify({'fulfillmentText':fetchjson()))
-    #return make_response(jsonify({'fulfillmentText': 'yes'}))
 
 if __name__ == "__main__":
     app.run()
