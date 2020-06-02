@@ -45,6 +45,8 @@ def fetchjson():
         filterr = str(req.get("queryResult").get("parameters").get("Filter"))
         #return filterr
         return results(filterr,fund)
+    elif action == "input.welcome":
+        return "Hey! Welcome to Franklin Templeton Voice Assistance. Please ask your question"
     else:
         return "Intent not recognized"
     
