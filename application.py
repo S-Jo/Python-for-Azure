@@ -43,8 +43,8 @@ def fetchjson():
         fund = p1.replace("['","")
         fund = fund.replace("']","")             
         filterr = str(req.get("queryResult").get("parameters").get("Filter"))
-        return filterr
-        #return results(filterr,fund)
+        #return filterr
+        return results(filterr,fund)
     else:
         return "Intent not recognized"
     
