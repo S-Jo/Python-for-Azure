@@ -42,7 +42,7 @@ def fetchjson():
         p1 = str(req.get("queryResult").get("parameters").get("Fund"))
         fund = p1.replace("['","")
         fund = fund.replace("']","")             
-        filterr = str(req.get("queryResult").get("parameters").get("filter"))
+        filterr = str(req.get("queryResult").get("parameters").get("Filter"))
         return filterr
         #return results(filterr,fund)
     else:
