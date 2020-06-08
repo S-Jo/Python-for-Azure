@@ -38,7 +38,7 @@ def fetchjson():
     req = request.get_json(force=True)
     action = req.get('queryResult').get('action')
     
-    if action == "FundAction":
+    if action == "singlefilter":
         p1 = str(req.get("queryResult").get("parameters").get("Fund"))
         fund = p1.replace("['","")
         fund = fund.replace("']","")             
