@@ -8,7 +8,7 @@ def hello():
     return "App is working"
 
 def results(action,filterr,fundname):
-    action == action
+    action = action
     filtertype = filterr
     fund = fundname
     server = 'tcp:srvforpoc.database.windows.net,1433'
@@ -48,6 +48,7 @@ def results(action,filterr,fundname):
 
 # function for response
 def fetchjson():
+    
     req = request.get_json(force=True)
     action = req.get('queryResult').get('action')
     
@@ -72,9 +73,10 @@ def fetchjson():
     
     #To test local
     '''
+    action = "singlefilter"
     p1 = "Expense Ratio"
     p2 = "franklin asian equity fund"
-    return results(p1,p2)
+    return results(action,p1,p2)
     '''
         
 @app.route("/webhook", methods=['GET', 'POST'])
