@@ -1,3 +1,4 @@
+  
 from flask import Flask, request, make_response, jsonify, render_template, redirect
 import pyodbc
 
@@ -8,6 +9,7 @@ def hello():
     return "App is working"
 
 def results(action,filterr,fundname):
+    
     action = action
     filtertype = filterr
     fund = fundname
@@ -24,23 +26,23 @@ def results(action,filterr,fundname):
     ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
     row = cursor.fetchone()
     if action == "singlefilter":
-        if "AUM" in filtertype:
+        if "aum" in filtertype.lower():
             return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
-        elif "Expense Ratio" in filtertype:
+        elif "expense ratio" in filtertype.lower():
             return "Expense Ratio for the " + fund + " is " + str(row[2]) + "."
-        elif "Fund Manager" in filtertype:
+        elif "fund manager" in filtertype.lower():
             return "Fund Manager for the " + fund + " is " + row[3] + "."
-        elif "Details" in filtertype:
+        elif "details" in filtertype.lower():
             return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio is " + str(row[2]) + " and it's managed by " + row[3] +"."
         else:
             return "Something went wrong in action singlefilter"
     elif action == "dualfilter":
-        if "AUM and Expense Ratio" in filtertype:
-            return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio is " + str(row[2]) +"."
-        if "AUM and Fund Manager" in filtertype:
+        if "aum and expense ratio" in filtertype.lower():
+            return fund + " has AUM of " + str(row[1]) + " Crore, Expense Ratio is " + str(row[2])
+        if "aum and fund manager" in filtertype.lower():
             return fund + " has AUM of " + str(row[1]) +  " and it's managed by " + row[3] +"."
-        if "Fund Manager and Expense Ratio" in filtertype: 
-            return " Expense Ratio of " + fund + " is " + str(row[2]) + " and it's managed by " + row[3] +"."
+        if "fund manager and expense ratio" in filtertype.lower(): 
+            return "Expense Ratio of " + fund + " is " + str(row[2]) + " and it's managed by " + row[3] +"."
         else:
             return "Something went wrong in action dualfilter"
     else:
@@ -73,12 +75,12 @@ def fetchjson():
     
     #To test local
     '''
-    action = "singlefilter"
-    p1 = "Expense Ratio"
+    action = "dualfilter"
+    p1 = "fund manager and expense ratio"
     p2 = "franklin asian equity fund"
     return results(action,p1,p2)
     '''
-        
+
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
     #return make_response(jsonify(fetchjson()))
