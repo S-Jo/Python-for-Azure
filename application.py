@@ -69,7 +69,7 @@ def fetchjson():
         #return filterr
         return results(action,filterr,fund)
     elif action == "input.welcome":
-        return "Hey! Welcome to Franklin Templeton Voice Assistance. Please ask your question"
+        return "Greetings from Franklin Voice. How may I assit you?"
     else:
         return "Intent not recognized"
     
