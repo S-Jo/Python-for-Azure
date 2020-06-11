@@ -53,7 +53,12 @@ def results(action,filterr,fundname,fundmanager):
         else:
             return "Something went wrong in action dualfilter"
     elif action == "Funds&Manager":
-        return "Funds under " + mgr + " are " + str(res)
+        if len(res) == 1:
+            return mgr + " manages only one fund and that is " + str(res)
+        elif len(res) > 1:
+            return mgr + " manages " + str(len(res)) + " funds and they are " + str(res)
+        else:
+            return "Please repeat your question"
     else:
         return "Intent/Action not recognized"
 
@@ -86,15 +91,13 @@ def fetchjson():
     
     #To test local
     '''
-    action = "singlefilter"
-    #"dualfilter"
+    action = "Funds&Manager"
     Mgr = "Roshi Jain"
     p1 = "expense ratio"
     p2 = "franklin asian equity fund"
-    return results(action,p1,p2,"")
-    #return results(action,"","",Mgr)
+    #return results(action,p1,p2,"")
+    return results(action,"","",Mgr)
     '''
-    
 
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
