@@ -104,7 +104,7 @@ def fetchjson():
     else:
         return "Intent not recognized"
     
-    #To test local
+    #To test locally
     '''
     action = "Funds&Manager"
     Mgr = "Roshi Jain"
