@@ -1,4 +1,3 @@
-  
 from flask import Flask, request, make_response, jsonify, render_template, redirect
 import pyodbc
 
@@ -8,11 +7,12 @@ app = Flask(__name__)
 def hello():
     return "App is working"
 
-def results(action,filterr,fundname):
+def results(action,filterr,fundname,fundmanager):
     
     action = action
     filtertype = filterr
     fund = fundname
+    mgr = fundmanager
     server = 'tcp:srvforpoc.database.windows.net,1433'
     database = 'DBBotServiceData'
     username = 'srvforpoc'
@@ -23,8 +23,15 @@ def results(action,filterr,fundname):
     except pyodbc.Error as err:
         return "Couldn't connect to database"
     cursor = cnxn.cursor()
-    ans = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
+    query1 = cursor.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
     row = cursor.fetchone()
+    cursor2 = cnxn.cursor()
+    query2 = cursor2.execute("SELECT Fund FROM [dbo].[bot_service] where [Fund Manager] = '" + mgr + "'")
+    ans2 = cursor2.fetchall()
+    res = []
+    for r in ans2:
+        res.append(r[0])
+    
     if action == "singlefilter":
         if "aum" in filtertype.lower():
             return "AUM for the " + fund + " is " + str(row[1]) + " Crore."
@@ -45,6 +52,8 @@ def results(action,filterr,fundname):
             return "Expense Ratio of " + fund + " is " + str(row[2]) + " and it's managed by " + row[3] +"."
         else:
             return "Something went wrong in action dualfilter"
+    elif action == "Funds&Manager":
+        return str(res)
     else:
         return "Intent/Action not recognized"
 
@@ -68,6 +77,9 @@ def fetchjson():
         filterr = str(req.get("queryResult").get("parameters").get("FilterDual"))
         #return filterr
         return results(action,filterr,fund)
+    elif action == "Funds&Manager":
+        mgr = str(req.get("queryResult").get("parameters").get("FundManager"))
+        return results(action,'','',mgr)
     elif action == "input.welcome":
         return "Greetings from Franklin Voice. How may I assit you?"
     else:
@@ -75,11 +87,14 @@ def fetchjson():
     
     #To test local
     '''
-    action = "dualfilter"
+    action = "Funds&Manager"
+    #"dualfilter"
+    Mgr = "Roshi Jain"
     p1 = "fund manager and expense ratio"
     p2 = "franklin asian equity fund"
-    return results(action,p1,p2)
-    '''
+    #return results(action,p1,p2)
+    return results(action,"","",Mgr)
+    '''   
 
 @app.route("/webhook", methods=['GET', 'POST'])
 def webhook():
