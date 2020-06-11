@@ -68,14 +68,14 @@ def fetchjson():
         fund = fund.replace("']","")             
         filterr = str(req.get("queryResult").get("parameters").get("Filter"))
         #return filterr
-        return results(action,filterr,fund)
+        return results(action,filterr,fund,"")
     elif action == "dualfilter":
         p1 = str(req.get("queryResult").get("parameters").get("Fund"))
         fund = p1.replace("['","")
         fund = fund.replace("']","")             
         filterr = str(req.get("queryResult").get("parameters").get("FilterDual"))
         #return filterr
-        return results(action,filterr,fund)
+        return results(action,filterr,fund,"")
     elif action == "Funds&Manager":
         mgr = str(req.get("queryResult").get("parameters").get("FundManager"))
         return results(action,'','',mgr)
