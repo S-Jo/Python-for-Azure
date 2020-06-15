@@ -71,7 +71,8 @@ def results(action,filterr,fundname,fundmanager,Notes):
 
     elif action == "TakeNotes":
         cursor3 = cnxn.cursor()
-        cursor3.execute("insert into dbo.user_input values ('" + usr_input + "')")
+        cursor3.execute("insert into dbo.user_input values ('" + usr_input + "', getdate())")
+        #("insert into dbo.user_input values ('" + usr_input + "')")
         cnxn.commit()
         return "Done"
 
