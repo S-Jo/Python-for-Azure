@@ -108,7 +108,8 @@ def fetchjson():
 
     elif action == "TakeNotes":
         user_input = str(req.get("queryResult").get("parameters").get("WriteBack"))
-        return results(action,"","","",user_input)
+        comment = user_input.replace("take notes ","")
+        return results(action,"","","",comment)
 
     elif action == "input.welcome":
         return "Greetings from Franklin Voice. How may I assit you?"
