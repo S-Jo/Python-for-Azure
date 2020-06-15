@@ -7,12 +7,13 @@ app = Flask(__name__)
 def hello():
     return "App is working"
 
-def results(action,filterr,fundname,fundmanager):
+def results(action,filterr,fundname,fundmanager,Notes):
     
     action = action
     filtertype = filterr
     fund = fundname
     mgr = fundmanager
+    usr_input = Notes
     server = 'tcp:srvforpoc.database.windows.net,1433'
     database = 'DBBotServiceData'
     username = 'srvforpoc'
@@ -68,6 +69,12 @@ def results(action,filterr,fundname,fundmanager):
         else:
             return "Please repeat your question"
 
+    elif action == "TakeNotes":
+        cursor3 = cnxn.cursor()
+        cursor3.execute("insert into dbo.user_input values ('" + usr_input + "')")
+        cnxn.commit()
+        return "Done"
+
     else:
         return "I need more training to answer it. Kindly help me by repeating your question."
 
@@ -87,16 +94,20 @@ def fetchjson():
     if action == "singlefilter":
         filterr = str(req.get("queryResult").get("parameters").get("Filter"))
         #return filterr
-        return results(action,filterr,fund,"")
+        return results(action,filterr,fund,"","")
 
     elif action == "dualfilter":            
         filterr = str(req.get("queryResult").get("parameters").get("FilterDual"))
         #return filterr
-        return results(action,filterr,fund,"")
+        return results(action,filterr,fund,"","")
 
     elif action == "Funds&Manager":
         mgr = str(req.get("queryResult").get("parameters").get("FundManager"))
-        return results(action,'','',mgr)
+        return results(action,"","",mgr,"")
+
+    elif action == "TakeNotes":
+        user_input = str(req.get("queryResult").get("parameters").get("WriteBack"))
+        return results(action,"","","",user_input)
 
     elif action == "input.welcome":
         return "Greetings from Franklin Voice. How may I assit you?"
@@ -106,12 +117,13 @@ def fetchjson():
     
     #To test locally
     '''
-    action = "Funds&Manager"
+    action = "TakeNotes"
+    notes = "Hello Franklin"
     Mgr = "Roshi Jain"
     p1 = "expense ratio"
     p2 = "franklin asian equity fund"
     #return results(action,p1,p2,"")
-    return results(action,"","",Mgr)
+    return results(action,"","","",notes)
     '''
 
 @app.route("/webhook", methods=['GET', 'POST'])
