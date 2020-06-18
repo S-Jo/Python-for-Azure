@@ -80,7 +80,7 @@ def results(action,filterr,fundname,fundmanager,Notes):
         return "I need more training to answer it. Kindly help me by repeating your question."
 
 #This method handles the http requests for the Dialogflow webhook
-#and meant to be used in conjunction with the weather Dialogflow agent
+#and meant to be used in conjunction with the Dialogflow agent
 def fetchjson():
     req = request.get_json(force=True)
     try:
