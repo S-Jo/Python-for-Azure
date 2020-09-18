@@ -90,7 +90,8 @@ def fetchjson():
 
     fundname = str(req.get("queryResult").get("parameters").get("Fund"))
     fund = fundname.replace("['","")
-    fund = fund.replace("']","")  
+    fund = fund.replace("']","")
+    fund = fund.upper()
 
     if action == "singlefilter":
         filterr = str(req.get("queryResult").get("parameters").get("Filter"))
