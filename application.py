@@ -1,5 +1,5 @@
 from flask import Flask, request, make_response, jsonify, render_template, redirect
-import pyodbc
+import snowflake.connector
 
 app = Flask(__name__)
 
@@ -7,32 +7,26 @@ app = Flask(__name__)
 def hello():
     return "App is working"
 
-def results(action,filterr,fundname,fundmanager,Notes):
-    
+def results(action,filterr,fundname,fundmanager,Notes):    
     action = action
     filtertype = filterr
     fund = fundname
     mgr = fundmanager
     usr_input = Notes
-    server = 'tcp:srvforpoc.database.windows.net,1433'
-    database = 'DBBotServiceData'
-    username = 'srvforpoc'
-    password = 'Server@123'
-    driver= '{ODBC Driver 17 for SQL Server}'
 
     try:
-        cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
+        cnxn=snowflake.connector.connect(user='kiran.sumanam@franklintempleton.com',password='Kauphy@123', account='zna36569.us-east-1',database='IDH_RAW',schema='INDIA_OWNER', warehouse = 'COMPUTE_XSMALL')
     except pyodbc.Error as err:
         return "Couldn't connect to database"
     
     #Single Filter & Dual Filter Intent
     cursor1 = cnxn.cursor()
-    query1 = cursor1.execute("SELECT * FROM [dbo].[bot_service] where Fund = '" + fund + "'")
+    query1 = cursor1.execute("SELECT * FROM \"IDH_RAW\".\"INDIA_OWNER\".\"BOT_SERVICE_DATA\" where FUND_NAME = '" + fund + "'")
     ans1 = cursor1.fetchone()
 
     #Funds Under Management    
     cursor2 = cnxn.cursor()
-    query2 = cursor2.execute("SELECT Fund FROM [dbo].[bot_service] where [Fund Manager] = '" + mgr + "'")
+    query2 = cursor2.execute("SELECT FUND_NAME FROM \"IDH_RAW\".\"INDIA_OWNER\".\"BOT_SERVICE_DATA\" where FUND_MANAGER = '" + mgr + "'")
     ans2 = cursor2.fetchall()
     res = []
     for r in ans2:
